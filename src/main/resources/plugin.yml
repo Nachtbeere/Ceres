@@ -1,7 +1,9 @@
-version: "0.1-SNAPSHOT"
+version: "0.2-SNAPSHOT"
 api-version: "1.15"
 name: "ceres"
 main: "net.nachtbeere.minecraft.ceres.Ceres"
 description: "Makes Farming hard again."
 author: "Mirai Kim(github: noxowl)"
 website: "https://github.com/Nachtbeere/Ceres"
+softdepend:
+  - kotlin
