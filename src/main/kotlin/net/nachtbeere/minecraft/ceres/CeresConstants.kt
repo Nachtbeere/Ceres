@@ -5,7 +5,7 @@ import org.bukkit.block.Biome
 
 class Constants() {
     companion object {
-        public val KNOWN_CROPS = arrayListOf<Material>(
+        public val KNOWN_CROPS = hashSetOf<Material>(
             Material.WHEAT,
             Material.BEETROOTS,
             Material.CARROTS,
@@ -23,12 +23,12 @@ class Constants() {
         public const val GROWRATE_MIN = 0
         public const val GROWRATE_MAX = 100
 
-        public val BIOME_POLAR = arrayListOf(
+        public val BIOME_POLAR = hashSetOf(
             Biome.SNOWY_MOUNTAINS,
             Biome.SNOWY_TUNDRA
         )
 
-        public val BIOME_SUBARCTIC = arrayListOf(
+        public val BIOME_SUBARCTIC = hashSetOf(
             Biome.MOUNTAINS,
             Biome.TAIGA,
             Biome.TAIGA_HILLS,
@@ -45,7 +45,7 @@ class Constants() {
             Biome.SNOWY_TAIGA_MOUNTAINS
         )
 
-        public val BIOME_TEMPERATE = arrayListOf(
+        public val BIOME_TEMPERATE = hashSetOf(
             Biome.RIVER,
             Biome.PLAINS,
             Biome.SUNFLOWER_PLAINS,
@@ -54,23 +54,23 @@ class Constants() {
             Biome.WOODED_HILLS
         )
 
-        public val BIOME_SUBTROPIC = arrayListOf(
+        public val BIOME_SUBTROPIC = hashSetOf(
             Biome.BAMBOO_JUNGLE,
             Biome.BAMBOO_JUNGLE_HILLS
         )
 
-        public val BIOME_TROPIC = arrayListOf(
+        public val BIOME_TROPIC = hashSetOf(
             Biome.JUNGLE,
             Biome.JUNGLE_HILLS
         )
 
-        public val BIOME_ARID = arrayListOf(
+        public val BIOME_ARID = hashSetOf(
             Biome.DESERT,
             Biome.DESERT_HILLS,
             Biome.DESERT_LAKES
         )
 
-        public val BIOME_OCEAN = arrayListOf(
+        public val BIOME_OCEAN = hashSetOf(
             Biome.BEACH,
             Biome.OCEAN,
             Biome.WARM_OCEAN,
@@ -83,4 +83,10 @@ class Constants() {
             Biome.DEEP_WARM_OCEAN
         )
     }
+}
+
+enum class DeathOrWeedResult(code: Int) {
+    PASS(0),
+    DEATH(1),
+    WEED(2)
 }

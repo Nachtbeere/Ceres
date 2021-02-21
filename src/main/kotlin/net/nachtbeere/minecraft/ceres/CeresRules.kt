@@ -1,8 +1,7 @@
 package net.nachtbeere.minecraft.ceres
 
 import org.bukkit.Material
-import org.bukkit.World
-import org.bukkit.block.Biome
+import org.bukkit.block.BlockFace
 import org.bukkit.event.block.BlockGrowEvent
 
 class FarmingRationalizer(event: BlockGrowEvent, pluginInstance: Ceres) {
@@ -36,6 +35,22 @@ class FarmingRationalizer(event: BlockGrowEvent, pluginInstance: Ceres) {
         this.currentEvent.isCancelled = true
     }
 
+    private fun setBaseToDirt() {
+        val baseBlock = this.currentEvent.block.getRelative(BlockFace.DOWN)
+        baseBlock.setBlockData(Material.DIRT.createBlockData())
+    }
+
+    private fun weedGrow() {
+        this.currentEvent.block.setBlockData(Material.TALL_GRASS.createBlockData())
+        this.cancelGrow()
+    }
+
+    private fun sproutDead() {
+        this.setBaseToDirt()
+        this.currentEvent.block.setBlockData(Material.DEAD_BUSH.createBlockData())
+        this.cancelGrow()
+    }
+
     fun rationalize() {
         if (this.isKnownCrops()) {
             if (this.isGrowFromSunlight()) {
@@ -45,7 +60,14 @@ class FarmingRationalizer(event: BlockGrowEvent, pluginInstance: Ceres) {
                     isStorm = this.isStorm()
                 )
                 if (!calculator.isGrowable()) {
-                    this.cancelGrow()
+                    val deathOrWeedCalculator = DeathOrWeedCalculator(
+                        cropData = this.currentEvent.block
+                    )
+                    when(deathOrWeedCalculator.calculate()) {
+                        DeathOrWeedResult.DEATH -> this.sproutDead()
+                        DeathOrWeedResult.WEED -> this.weedGrow()
+                        DeathOrWeedResult.PASS -> this.cancelGrow()
+                    }
                 }
             } else {
                 this.cancelGrow()

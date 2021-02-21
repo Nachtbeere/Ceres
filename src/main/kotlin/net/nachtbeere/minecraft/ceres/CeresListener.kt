@@ -1,6 +1,5 @@
 package net.nachtbeere.minecraft.ceres
 
-
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -10,7 +9,7 @@ class CeresListener(pluginInstance: Ceres) : Listener {
     init {
         pluginInstance.server.pluginManager.registerEvents(this, pluginInstance)
     }
-    val instance = pluginInstance
+    private val instance = pluginInstance
 
     @EventHandler(priority = EventPriority.NORMAL)
     fun onCropsGrown(event: BlockGrowEvent) {
